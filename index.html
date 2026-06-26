@@ -102,6 +102,16 @@
   .cap{font-family:var(--mono); font-size:11px; line-height:1.6; color:var(--faint);
     margin:14px 0 0; max-width:80ch}
 
+  .mobile-h2h{display:none}
+  .mobile-h2h-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px}
+  .mobile-h2h-cell{background:var(--surface); border:1px solid var(--line); border-radius:10px;
+    padding:9px 10px}
+  .mobile-h2h-lab{font-family:var(--mono); font-size:9px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--faint); margin-bottom:5px}
+  .mobile-h2h-val{font-family:var(--mono); font-size:13px; color:var(--muted); line-height:1.35}
+  .mobile-h2h-val .win{color:var(--hot); font-weight:700}
+  .mobile-h2h-vs{color:var(--faint); padding:0 4px}
+
   /* head to head */
   .h2h{margin-top:24px; border:1px solid var(--line); border-radius:16px; overflow:hidden; background:var(--surface)}
   .h2h-name{display:grid; grid-template-columns:1fr auto 1fr; align-items:end;
@@ -167,7 +177,25 @@
     .wrap{padding:0 18px}
     .mast-meta{display:none}
     .hero{padding:40px 0 6px}
-    .cmp{grid-template-columns:1fr}
+    .picker{position:sticky; top:0; z-index:20; display:flex; grid-template-columns:none;
+      overflow-x:auto; gap:9px; margin:20px -18px 0; padding:10px 18px;
+      background:rgba(245,241,233,.96); border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line); scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch}
+    .picker::-webkit-scrollbar,.cmp::-webkit-scrollbar{display:none}
+    .ev{flex:0 0 150px; padding:10px 11px; border-radius:10px; scroll-snap-align:start}
+    .ev:hover{transform:none; box-shadow:none}
+    .ev-year{font-size:10px}
+    .ev-tag{font-size:15px; margin:4px 0 6px}
+    .ev-mini{font-size:9px}
+    .mobile-h2h{display:block; margin:10px 0 14px}
+    .cmp{display:flex; grid-template-columns:none; overflow-x:auto; scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch; gap:12px; margin:12px -18px 0; padding:0 18px 12px}
+    .panel{flex:0 0 min(84vw,340px); scroll-snap-align:center; padding:14px 14px 12px; border-radius:14px}
+    .p-name{font-size:22px}
+    .p-blurb{font-size:13px; min-height:auto}
+    .legend{font-size:10px; gap:10px 14px; margin-top:10px}
+    .h2h{display:none}
     .dec{gap:5px; height:196px; margin-bottom:28px}
     .dec-col{gap:6px}
     .dec-lab{font-size:8px; height:44px}
@@ -206,6 +234,7 @@
     <p class="lede">Heat never arrives the same way twice. <b>1976</b> was a marathon of hot days under clear skies that fell cool each night; <b>2022</b> was a single violent spike that broke within a day; <b>2026</b> stacks hot days and hot nights back to back. Pick an event to set it beside this week &mdash; both panels share one temperature scale.</p>
 
     <div class="picker" id="picker"></div>
+    <div class="mobile-h2h" id="mobileH2H"></div>
 
     <div class="cmp">
       <div class="panel ref">
@@ -415,10 +444,11 @@ function render(){
   const maxDays=Math.max(REF.days.length, e.days.length);
   let dayW=(w-padL-padR)/maxDays;
   dayW=Math.max(12, Math.min(dayW, 44));
-  const H=300;
+  const H=window.matchMedia('(max-width:760px)').matches?260:300;
   ribbon(document.getElementById('refChart'), REF, dayW, H);
   ribbon(document.getElementById('cmpChart'), e, dayW, H);
   buildH2H(REF,e);
+  buildMobileH2H(REF,e);
 }
 
 function buildH2H(a,b){
@@ -433,6 +463,24 @@ function buildH2H(a,b){
       `<div class="h2h-lab">${lab}</div><div class="h2h-val r ${bCls}">${fmt(bv)}${unit?`<span class="u">${unit}</span>`:''}</div></div>`;
   });
   document.getElementById('h2h').innerHTML=html;
+}
+
+function buildMobileH2H(a,b){
+  const rows=[
+    ['Hottest day','peakTx','&deg;C'],
+    ['Warmest night','hottestNight','&deg;C'],
+    ['Tropical nights','tropicalNights',''],
+    ['Days >= 28','daysOver28','']
+  ];
+  const fmt=(v,u)=>Number.isInteger(v)?`${v}${u?` ${u}`:''}`:`${v.toFixed(1)}${u?` ${u}`:''}`;
+  const html='<div class="mobile-h2h-grid">'+rows.map(([lab,key,unit])=>{
+    const av=a.stats[key], bv=b.stats[key];
+    const aCls=av>=bv?'win':'', bCls=bv>av?'win':'';
+    return `<div class="mobile-h2h-cell"><div class="mobile-h2h-lab">${lab}</div>`+
+      `<div class="mobile-h2h-val"><span class="${aCls}">${fmt(av,unit)}</span>`+
+      `<span class="mobile-h2h-vs"> vs </span><span class="${bCls}">${fmt(bv,unit)}</span></div></div>`;
+  }).join('')+'</div>';
+  document.getElementById('mobileH2H').innerHTML=html;
 }
 
 /* decade strip */
