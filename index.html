@@ -73,9 +73,7 @@
   .ev:focus-visible{outline:2px solid var(--day); outline-offset:3px}
   .ev[aria-pressed="true"]{border-color:var(--hot); box-shadow:inset 0 0 0 1.5px var(--hot)}
   .ev-year{font-family:var(--mono); font-size:12px; letter-spacing:.06em; color:var(--faint)}
-  .ev-tag{font-family:var(--brand); font-weight:700; font-size:19px; line-height:1.1; margin:5px 0 8px; letter-spacing:-.01em}
-  .ev-mini{font-family:var(--mono); font-size:10.5px; letter-spacing:.01em; color:var(--muted)}
-  .ev-mini b{color:var(--hot); font-weight:700}
+  .ev-tag{font-family:var(--brand); font-weight:700; font-size:19px; line-height:1.1; margin:5px 0 0; letter-spacing:-.01em}
 
   /* comparison panels */
   .cmp{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:22px}
@@ -189,8 +187,7 @@
     .ev{flex:0 0 150px; padding:10px 11px; border-radius:10px; scroll-snap-align:start}
     .ev:hover{transform:none; box-shadow:none}
     .ev-year{font-size:10px}
-    .ev-tag{font-size:15px; margin:4px 0 6px}
-    .ev-mini{font-size:9px}
+    .ev-tag{font-size:15px; margin:4px 0 0}
     .mobile-h2h{display:block; margin:10px 0 14px}
     .mobile-event-note{display:block; margin:0 2px 14px; font-size:13.5px;
       line-height:1.55; color:var(--muted)}
@@ -432,8 +429,7 @@ let active='e1976';
 comps.forEach(e=>{
   const b=document.createElement('button');
   b.className='ev'; b.setAttribute('aria-pressed','false');
-  b.innerHTML=`<div class="ev-year">${e.year}</div><div class="ev-tag">${e.tag}</div>`+
-    `<div class="ev-mini">${e.stats.daysOver28} days &ge;28° &middot; hottest night <b>${e.stats.hottestNight.toFixed(1)}°</b></div>`;
+  b.innerHTML=`<div class="ev-year">${e.year}</div><div class="ev-tag">${e.tag}</div>`;
   b.addEventListener('click',()=>{active=e.id; render();});
   picker.appendChild(b);
 });
