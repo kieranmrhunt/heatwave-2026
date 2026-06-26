@@ -162,6 +162,8 @@
   .scroll-cue span{display:block; height:100%; border-radius:inherit;
     background:linear-gradient(90deg,var(--ember),var(--hot)); transform:translateX(0)}
   svg.spell{display:block; width:100%; height:auto; overflow:visible}
+  .subhead{font-family:var(--brand); font-size:clamp(23px,3.4vw,32px); line-height:1.05;
+    font-weight:800; letter-spacing:-.01em; color:var(--ink); margin:34px 0 14px}
   .bars{margin:30px 0 4px; display:grid; grid-template-columns:42px minmax(0,1fr) max-content;
     align-items:center; column-gap:13px; row-gap:9px}
   .bar-row{display:contents}
@@ -217,6 +219,7 @@
     #spellChart svg.spell{width:880px; max-width:none}
     .scroll-cue{position:sticky; left:0; display:block; height:6px; margin:8px 2px 0;
       border-radius:999px; background:rgba(33,28,42,.12); overflow:hidden}
+    .subhead{font-size:25px; margin:30px 0 12px}
     .bars{grid-template-columns:42px minmax(0,1fr); column-gap:13px; row-gap:4px}
     .bar-val{grid-column:2; justify-self:end; margin:-2px 0 6px}
     .band{padding:48px 0}
@@ -295,6 +298,7 @@
       <div id="spellChart"></div>
     </div>
 
+    <h3 class="subhead">Year by year</h3>
     <div class="bars" id="hoursBars"></div>
     <p class="cap">Longest unbroken spell above 20&nbsp;°C each year in the five-minute record. Most years manage a single hot day before the night breaks it; only 2020 and 2026 carried the heat through more than one night.</p>
   </section>
