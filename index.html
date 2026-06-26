@@ -155,8 +155,9 @@
   .spell-cap b{color:var(--ink); font-weight:700}
   #spellChart{width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:4px}
   svg.spell{display:block; width:100%; height:auto; overflow:visible}
-  .bars{margin:30px 0 4px; display:flex; flex-direction:column; gap:9px}
-  .bar-row{display:grid; grid-template-columns:42px 1fr auto; align-items:center; gap:13px}
+  .bars{margin:30px 0 4px; display:grid; grid-template-columns:42px minmax(0,1fr) max-content;
+    align-items:center; column-gap:13px; row-gap:9px}
+  .bar-row{display:contents}
   .bar-yr{font-family:var(--mono); font-size:12px; color:var(--muted); text-align:right}
   .bar-track{position:relative; height:24px; background:rgba(33,28,42,.045); border-radius:6px}
   .bar-fill{position:absolute; left:0; top:0; bottom:0; width:0; border-radius:6px;
@@ -207,6 +208,8 @@
     .dec-lab{font-size:8px; height:44px}
     .spellCard{padding:16px 14px 14px; margin-left:-4px; margin-right:-4px}
     #spellChart svg.spell{width:880px; max-width:none}
+    .bars{grid-template-columns:42px minmax(0,1fr); column-gap:13px; row-gap:4px}
+    .bar-val{grid-column:2; justify-self:end; margin:-2px 0 6px}
     .band{padding:48px 0}
   }
   @media (prefers-reduced-motion:reduce){ *{animation:none!important; transition:none!important} }
@@ -585,7 +588,7 @@ function renderSpell(){
 /* continuous-hours: per-year bars */
 function renderBars(){
   const host=document.getElementById('hoursBars'); if(!host) return;
-  const AX=60; host.innerHTML='';
+  const AX=Math.max(...HOURS.perYear.map(d=>d.hours)); host.innerHTML='';
   HOURS.perYear.forEach(d=>{
     const cls=d.ongoing?'hot':(d.hours>=40?'mid':'muted');
     const row=document.createElement('div');
@@ -598,9 +601,7 @@ function renderBars(){
       `<div class="bar-val">${val}</div>`;
     host.appendChild(row);
   });
-  const grow=()=>host.querySelectorAll('.bar-fill').forEach(f=>f.style.width=f.dataset.w+'%');
-  if(REDUCE) grow();
-  else new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){grow();o.disconnect();}});},{threshold:.2}).observe(host);
+  host.querySelectorAll('.bar-fill').forEach(f=>f.style.width=f.dataset.w+'%');
 }
 
 /* init + responsive rescale */
