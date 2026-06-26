@@ -185,7 +185,7 @@
       background:rgba(245,241,233,.96); border-top:1px solid var(--line);
       border-bottom:1px solid var(--line); scroll-snap-type:x mandatory;
       -webkit-overflow-scrolling:touch}
-    .picker::-webkit-scrollbar,.cmp::-webkit-scrollbar{display:none}
+    .picker::-webkit-scrollbar{display:none}
     .ev{flex:0 0 150px; padding:10px 11px; border-radius:10px; scroll-snap-align:start}
     .ev:hover{transform:none; box-shadow:none}
     .ev-year{font-size:10px}
@@ -196,9 +196,8 @@
       line-height:1.55; color:var(--muted)}
     .mobile-event-note b{display:block; font-family:var(--brand); font-size:15px;
       line-height:1.2; margin-bottom:3px}
-    .cmp{display:flex; grid-template-columns:none; overflow-x:auto; scroll-snap-type:x mandatory;
-      -webkit-overflow-scrolling:touch; gap:12px; margin:12px -18px 0; padding:0 18px 12px}
-    .panel{flex:0 0 min(84vw,340px); scroll-snap-align:center; padding:14px 14px 12px; border-radius:14px}
+    .cmp{display:grid; grid-template-columns:1fr; gap:14px; overflow:visible; margin:12px 0 0; padding:0}
+    .panel{padding:14px 14px 12px; border-radius:14px}
     .p-name{font-size:22px}
     .p-blurb{font-size:13px; min-height:auto}
     .legend{font-size:10px; gap:10px 14px; margin-top:10px}
@@ -273,7 +272,7 @@
     </div>
 
     <div class="h2h" id="h2h"></div>
-    <p class="cap"><b>June 2026 (left)</b> against the chosen event (right). Each day is drawn as a band from that night's minimum up to the day's maximum; the lower line shifts from blue toward red as it crosses 20&nbsp;°C. Both panels use an identical temperature axis and the same width per day, so length and height compare directly.</p>
+    <p class="cap"><b>June 2026</b> against the chosen event. Each day is drawn as a band from that night's minimum up to the day's maximum; the lower line shifts from blue toward red as it crosses 20&nbsp;°C. Both panels use an identical temperature axis and the same width per day, so length and height compare directly.</p>
   </section>
 
   <!-- ============ FIGURE 2 — CONTINUOUS HOURS ABOVE 20°C ============ -->
