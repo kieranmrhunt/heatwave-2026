@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A June with no precedent — Reading University Observatory, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f5f1e9; --surface:#ffffff; --surface-2:#fbf8f2;
+    --ink:#211c2a; --muted:#665f73; --faint:#938b9f;
+    --line:rgba(33,28,42,.12); --line-strong:rgba(33,28,42,.22);
+    --day:#cf6d12; --day-line:#e0851f; --day-soft:rgba(207,109,18,.12);
+    --cool:#1f8fa6; --hot:#d61f55; --ember:#df4a1e;
+    --maxw:1120px;
+    --brand:"Effra","Effra Std","Mulish",system-ui,"Segoe UI",Roboto,sans-serif;
+    --mono:"Space Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; color:var(--ink); font-family:var(--brand); font-weight:400;
+    line-height:1.6; letter-spacing:.002em; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    background:
+      radial-gradient(1100px 560px at 88% -6%, rgba(223,74,30,.10), transparent 62%),
+      radial-gradient(820px 520px at -4% 2%, rgba(214,31,85,.07), transparent 58%),
+      var(--bg);
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px}
+  ::selection{background:var(--hot); color:#fff}
+
+  /* masthead */
+  .mast{display:flex; align-items:center; justify-content:space-between; gap:20px;
+    padding:24px 0 20px; border-bottom:1px solid var(--line)}
+  .brand{display:flex; align-items:center; gap:13px; min-width:0; text-decoration:none; color:inherit}
+  .brand-img{height:38px; width:auto; display:none}
+  .brand-word{display:flex; flex-direction:column; line-height:1.12}
+  .brand-word .uor{font-family:var(--brand); font-weight:800; font-size:23px; letter-spacing:-.01em}
+  .brand-word .obs{font-size:12px; font-weight:500; color:var(--muted); letter-spacing:.01em}
+  .mast-meta{font-family:var(--mono); font-size:11px; letter-spacing:.04em; color:var(--muted);
+    text-align:right; flex:none}
+  .mast-meta b{color:var(--ink); font-weight:400}
+
+  /* hero copy */
+  .hero{padding:60px 0 14px}
+  h1.headline{font-family:var(--brand); font-weight:800;
+    font-size:clamp(38px,7vw,78px); line-height:1.0; letter-spacing:-.025em;
+    margin:0 0 26px; max-width:15ch}
+  h1.headline .n{color:var(--hot)}
+  h1.headline .d{color:var(--day)}
+  .standfirst{font-size:clamp(17px,2vw,21px); line-height:1.55; color:var(--muted);
+    max-width:64ch; font-weight:400; margin:0}
+  .standfirst b{color:var(--ink); font-weight:700}
+
+  /* sections */
+  .band{padding:64px 0; border-top:1px solid var(--line)}
+  .band.first{border-top:0; padding-top:46px}
+  h2.title{font-family:var(--brand); font-weight:800; letter-spacing:-.02em;
+    font-size:clamp(27px,4vw,44px); line-height:1.04; margin:0 0 16px; max-width:22ch}
+  .lede{font-size:17px; color:var(--muted); max-width:64ch; margin:0}
+  .lede b{color:var(--ink); font-weight:700}
+
+  /* picker */
+  .picker{display:grid; grid-template-columns:repeat(auto-fit,minmax(166px,1fr));
+    gap:12px; margin:30px 0 0}
+  .ev{appearance:none; text-align:left; cursor:pointer; color:var(--ink);
+    background:var(--surface); border:1px solid var(--line-strong); border-radius:13px;
+    padding:15px 15px 14px; transition:transform .16s ease, border-color .16s ease, box-shadow .16s ease}
+  .ev:hover{transform:translateY(-3px); border-color:var(--ink); box-shadow:0 12px 26px -18px rgba(33,28,42,.5)}
+  .ev:focus-visible{outline:2px solid var(--day); outline-offset:3px}
+  .ev[aria-pressed="true"]{border-color:var(--hot); box-shadow:inset 0 0 0 1.5px var(--hot)}
+  .ev-year{font-family:var(--mono); font-size:12px; letter-spacing:.06em; color:var(--faint)}
+  .ev-tag{font-family:var(--brand); font-weight:700; font-size:19px; line-height:1.1; margin:5px 0 8px; letter-spacing:-.01em}
+  .ev-mini{font-family:var(--mono); font-size:10.5px; letter-spacing:.01em; color:var(--muted)}
+  .ev-mini b{color:var(--hot); font-weight:700}
+
+  /* comparison panels */
+  .cmp{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:22px}
+  .panel{background:var(--surface); border:1px solid var(--line); border-radius:16px;
+    padding:18px 18px 15px; min-width:0; box-shadow:0 18px 40px -34px rgba(33,28,42,.55)}
+  .panel.ref{border-color:rgba(214,31,85,.4); box-shadow:0 18px 44px -30px rgba(214,31,85,.4)}
+  .p-head{display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap}
+  .p-name{font-family:var(--brand); font-weight:800; font-size:25px; letter-spacing:-.02em}
+  .p-when{font-family:var(--mono); font-size:11px; letter-spacing:.04em; color:var(--faint)}
+  .badge{font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+    color:#fff; background:var(--hot); padding:3px 9px; border-radius:20px; font-weight:700}
+  .p-blurb{font-size:13.5px; color:var(--muted); margin:8px 0 10px; min-height:3.3em}
+  .chartHost{width:100%}
+  svg.ribbon{display:block; max-width:100%; overflow:visible}
+
+  .legend{display:flex; gap:18px 24px; flex-wrap:wrap; margin-top:20px;
+    font-family:var(--mono); font-size:11px; letter-spacing:.01em; color:var(--muted)}
+  .legend span{display:inline-flex; align-items:center; gap:8px}
+  .sw{width:22px; height:0; border-top-width:3px; border-top-style:solid; border-radius:2px}
+  .sw.day{border-color:var(--day-line)}
+  .sw.night{width:24px; border-image:linear-gradient(90deg,var(--cool),var(--hot)) 1; border-color:var(--hot)}
+  .sw.trop{border-top-style:dashed; border-color:var(--hot)}
+  .sw.hw{border-top-style:dashed; border-color:var(--ember)}
+  .cap{font-family:var(--mono); font-size:11px; line-height:1.6; color:var(--faint);
+    margin:14px 0 0; max-width:80ch}
+
+  /* head to head */
+  .h2h{margin-top:24px; border:1px solid var(--line); border-radius:16px; overflow:hidden; background:var(--surface)}
+  .h2h-name{display:grid; grid-template-columns:1fr auto 1fr; align-items:end;
+    padding:14px 16px 11px; background:var(--surface-2)}
+  .h2h-name .nm{font-family:var(--brand); font-weight:800; font-size:19px; letter-spacing:-.01em}
+  .h2h-name .nm.r{text-align:right; color:var(--muted)}
+  .h2h-name .vs{font-family:var(--mono); font-size:10px; letter-spacing:.16em; color:var(--faint); text-align:center; text-transform:uppercase}
+  .h2h-row{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; border-top:1px solid var(--line)}
+  .h2h-lab{text-align:center; font-family:var(--mono); font-size:10.5px; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--faint); padding:11px 8px}
+  .h2h-val{padding:12px 16px; font-family:var(--mono); font-size:clamp(15px,2.2vw,19px)}
+  .h2h-val.l{text-align:right}
+  .h2h-val.r{text-align:left; color:var(--muted)}
+  .h2h-val .u{font-size:.62em; color:var(--faint); margin-left:3px}
+  .h2h-val.win{color:var(--hot); font-weight:700}
+  .h2h-val.r.win{color:var(--day); font-weight:700}
+
+  /* decade strip */
+  .dec{display:grid; grid-template-columns:repeat(13,1fr); gap:9px; align-items:end; margin:32px 0 10px; height:210px}
+  .dec-col{display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; gap:7px}
+  .dec-bar{width:100%; max-width:34px; border-radius:5px 5px 2px 2px;
+    background:linear-gradient(180deg,var(--hot),var(--ember)); min-height:3px;
+    transition:height .7s cubic-bezier(.2,.8,.2,1)}
+  .dec-bar.zero{background:var(--line-strong)}
+  .dec-n{font-family:var(--mono); font-weight:700; font-size:12px; color:var(--ink)}
+  .dec-n.zero{color:var(--faint); font-weight:400}
+  .dec-lab{font-family:var(--mono); font-size:9.5px; color:var(--muted);
+    transform:rotate(-90deg); white-space:nowrap; height:34px; display:flex; align-items:center}
+
+  /* continuous-hours section */
+  .spellCard{background:var(--surface); border:1px solid var(--line); border-radius:16px;
+    padding:20px 20px 16px; margin-top:30px; box-shadow:0 18px 44px -34px rgba(33,28,42,.5)}
+  .spell-stat{display:flex; align-items:baseline; gap:16px; margin:2px 2px 14px; flex-wrap:wrap}
+  .spell-big{font-family:var(--brand); font-weight:800; font-size:clamp(44px,8vw,72px);
+    line-height:.85; letter-spacing:-.03em; color:var(--hot)}
+  .spell-big .u{font-size:.42em; font-weight:700; margin-left:2px}
+  .spell-cap{font-size:14px; color:var(--muted); line-height:1.4}
+  .spell-cap b{color:var(--ink); font-weight:700}
+  svg.spell{display:block; width:100%; height:auto; overflow:visible}
+  .bars{margin:30px 0 4px; display:flex; flex-direction:column; gap:9px}
+  .bar-row{display:grid; grid-template-columns:42px 1fr auto; align-items:center; gap:13px}
+  .bar-yr{font-family:var(--mono); font-size:12px; color:var(--muted); text-align:right}
+  .bar-track{position:relative; height:24px; background:rgba(33,28,42,.045); border-radius:6px}
+  .bar-fill{position:absolute; left:0; top:0; bottom:0; width:0; border-radius:6px;
+    transition:width .9s cubic-bezier(.2,.8,.2,1)}
+  .bar-fill.muted{background:var(--line-strong)}
+  .bar-fill.mid{background:linear-gradient(90deg,var(--day),var(--ember))}
+  .bar-fill.hot{background:linear-gradient(90deg,var(--ember),var(--hot))}
+  .bar-row.hi .bar-yr{color:var(--ink); font-weight:700}
+  .bar-val{font-family:var(--mono); font-size:12.5px; color:var(--ink); white-space:nowrap}
+  .bar-val b{font-weight:700}
+  .bar-val .nights{color:var(--faint)}
+  .bar-val .live{color:var(--hot); font-weight:700}
+
+  footer{border-top:1px solid var(--line); padding:28px 0 60px; margin-top:18px}
+  .foot-grid{display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap;
+    font-family:var(--mono); font-size:11px; letter-spacing:.01em; color:var(--muted); line-height:1.7}
+  .foot-grid b{color:var(--ink); font-weight:700}
+
+  @media (max-width:760px){
+    .wrap{padding:0 18px}
+    .mast-meta{display:none}
+    .hero{padding:40px 0 6px}
+    .cmp{grid-template-columns:1fr}
+    .dec{gap:5px; height:180px}
+    .dec-lab{font-size:8px}
+    .band{padding:48px 0}
+  }
+  @media (prefers-reduced-motion:reduce){ *{animation:none!important; transition:none!important} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ MASTHEAD ============ -->
+  <header class="mast">
+    <a class="brand" href="#">
+      <!-- Drop the official asset in as uor-logo.svg beside this file; the wordmark below is the licensed-font fallback -->
+      <img class="brand-img" src="uor-logo.svg" alt="University of Reading"
+           onerror="this.remove();var w=document.getElementById('brandWord');if(w)w.style.display='flex';">
+      <span class="brand-word" id="brandWord">
+        <span class="uor">University of Reading</span>
+        <span class="obs">Atmospheric Observatory</span>
+      </span>
+    </a>
+    <div class="mast-meta">Daily temperature record<br><b>1908 &ndash; 26 June 2026</b></div>
+  </header>
+
+  <!-- ============ HERO COPY ============ -->
+  <section class="hero">
+    <h1 class="headline">Hottest by <span class="d">day</span>.<br>Hottest by <span class="n">night</span>.</h1>
+    <p class="standfirst">June 2026 has rewritten the observatory's record on both counts. The peak of <b>34.9&nbsp;°C</b> on the 24th is the hottest June day in 118 years &mdash; beating the old mark of 34.0&nbsp;°C set in <b>1976</b> &mdash; and the temperature passed 34&nbsp;°C on <b>four days running</b>, a streak never recorded here in any month. After dark it went further: the nights of the 25th and 26th, at 20.9&nbsp;°C and <b>21.3&nbsp;°C</b>, are the two warmest ever logged on this site.</p>
+  </section>
+
+  <!-- ============ FIGURE 1 — COMPARISON (the highlight) ============ -->
+  <section class="band first">
+    <h2 class="title">Three shapes of a heatwave</h2>
+    <p class="lede">Heat never arrives the same way twice. <b>1976</b> was a marathon of hot days under clear skies that fell cool each night; <b>2022</b> was a single violent spike that broke within a day; <b>2026</b> stacks hot days and hot nights back to back. Pick an event to set it beside this week &mdash; both panels share one temperature scale.</p>
+
+    <div class="picker" id="picker"></div>
+
+    <div class="cmp">
+      <div class="panel ref">
+        <div class="p-head">
+          <span class="p-name">June 2026</span>
+          <span class="badge">This heatwave</span>
+        </div>
+        <p class="p-blurb" id="refBlurb"></p>
+        <div class="chartHost" id="refChart"></div>
+      </div>
+      <div class="panel">
+        <div class="p-head">
+          <span class="p-name" id="cmpName"></span>
+          <span class="p-when" id="cmpWhen"></span>
+        </div>
+        <p class="p-blurb" id="cmpBlurb"></p>
+        <div class="chartHost" id="cmpChart"></div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span><i class="sw day"></i>Daytime maximum</span>
+      <span><i class="sw night"></i>Overnight minimum &mdash; cool&nbsp;&rarr;&nbsp;tropical</span>
+      <span><i class="sw hw"></i>28&nbsp;°C heatwave-day line</span>
+      <span><i class="sw trop"></i>20&nbsp;°C tropical-night line</span>
+    </div>
+
+    <div class="h2h" id="h2h"></div>
+    <p class="cap"><b>June 2026 (left)</b> against the chosen event (right). Each day is drawn as a band from that night's minimum up to the day's maximum; the lower line shifts from blue toward red as it crosses 20&nbsp;°C. Both panels use an identical temperature axis and the same width per day, so length and height compare directly.</p>
+  </section>
+
+  <!-- ============ FIGURE 2 — CONTINUOUS HOURS ABOVE 20°C ============ -->
+  <section class="band">
+    <h2 class="title">Fifty-eight hours above twenty</h2>
+    <p class="lede">Five-minute readings since 2015 let us ask a sharper question: how long did the air stay <b>continuously</b> above 20&nbsp;°C, never once dropping back? In a normal summer the answer is a single afternoon &mdash; the heat breaks every night. This June it held for more than two and a half days, riding straight through two nights, and was <b>still unbroken</b> when the latest reading came in.</p>
+
+    <div class="spellCard">
+      <div class="spell-stat">
+        <span class="spell-big">58<span class="u">hrs</span></span>
+        <span class="spell-cap"><b>continuously above 20&nbsp;°C</b><br>24&ndash;26 June 2026 &middot; the longest in the five-minute record, and still unbroken</span>
+      </div>
+      <div id="spellChart"></div>
+    </div>
+    <p class="cap">Dry-bulb temperature every five minutes through the June 2026 spell. Shaded bands are night; the filled area is every degree the air held above 20&nbsp;°C. The trace sinks toward the line each night but never touches it &mdash; 58 hours and counting.</p>
+
+    <div class="bars" id="hoursBars"></div>
+    <p class="cap">Longest unbroken spell above 20&nbsp;°C each year in the five-minute record (2015&ndash;2026). Most years manage a single hot day before the night breaks it; only 2020 and 2026 carried the heat through more than one night.</p>
+  </section>
+
+  <!-- ============ FIGURE 3 — DECADE STRIP ============ -->
+  <section class="band">
+    <h2 class="title">Tropical nights barely existed &mdash; until now</h2>
+    <p class="lede">A <b>tropical night</b> never drops below 20&nbsp;°C. In the whole twentieth century the observatory logged just two &mdash; one in 1949, one in 1995. The 2020s alone hold <b>six</b>, and the two warmest of all fall in this single week.</p>
+    <div class="dec" id="dec"></div>
+    <p class="cap">Nights at or above 20&nbsp;°C per decade, any month &middot; Reading University Atmospheric Observatory.</p>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="foot-grid">
+      <div><b>Source</b><br>University of Reading Atmospheric Observatory<br>daily maximum &amp; minimum air temperature</div>
+      <div><b>Record</b><br>43,277 daily observations<br>1 Jan 1908 &ndash; 26 Jun 2026</div>
+      <div><b>Definitions</b><br>Tropical night: overnight min &ge; 20&nbsp;°C<br>Heatwave day: daily max &ge; 28&nbsp;°C (Berkshire)</div>
+      <div><b>Note</b><br>26 Jun 2026 max (34.1&nbsp;°C)<br>is a same-day reading</div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+const DATA = {"events": [{"id": "e2026", "year": 2026, "label": "June 2026", "tag": "The nights that won't let go", "blurb": "Four straight days near 34 \u00b0C \u2014 and the overnight minimum climbed every night, ending at 21.3 \u00b0C: the hottest night ever logged at the observatory.", "isReference": true, "days": [{"d": "2026-06-16", "dow": "Tue", "dm": "16 Jun", "tx": 24.8, "tn": 14.7}, {"d": "2026-06-17", "dow": "Wed", "dm": "17 Jun", "tx": 23.5, "tn": 15.9}, {"d": "2026-06-18", "dow": "Thu", "dm": "18 Jun", "tx": 24.5, "tn": 16.4}, {"d": "2026-06-19", "dow": "Fri", "dm": "19 Jun", "tx": 28.0, "tn": 13.4}, {"d": "2026-06-20", "dow": "Sat", "dm": "20 Jun", "tx": 25.1, "tn": 16.4}, {"d": "2026-06-21", "dow": "Sun", "dm": "21 Jun", "tx": 29.9, "tn": 14.7}, {"d": "2026-06-22", "dow": "Mon", "dm": "22 Jun", "tx": 29.8, "tn": 17.2}, {"d": "2026-06-23", "dow": "Tue", "dm": "23 Jun", "tx": 34.1, "tn": 18.9}, {"d": "2026-06-24", "dow": "Wed", "dm": "24 Jun", "tx": 34.9, "tn": 19.0}, {"d": "2026-06-25", "dow": "Thu", "dm": "25 Jun", "tx": 34.2, "tn": 20.9}, {"d": "2026-06-26", "dow": "Fri", "dm": "26 Jun", "tx": 34.1, "tn": 21.3}], "stats": {"peakTx": 34.9, "peakTxDate": "24 Jun", "hottestNight": 21.3, "hottestNightDate": "26 Jun", "tropicalNights": 2, "warmNights": 4, "meanTn": 17.2, "meanTx": 29.4, "daysOver28": 7, "daysOver30": 4}}, {"id": "e1976", "year": 1976, "label": "Summer 1976", "tag": "The marathon", "blurb": "Sixteen unbroken days above 28 \u00b0C \u2014 the longest spell in the record. But the skies were clear and the nights fell away: not one tropical night.", "isReference": false, "days": [{"d": "1976-06-22", "dow": "Tue", "dm": "22 Jun", "tx": 26.4, "tn": 11.0}, {"d": "1976-06-23", "dow": "Wed", "dm": "23 Jun", "tx": 29.6, "tn": 16.0}, {"d": "1976-06-24", "dow": "Thu", "dm": "24 Jun", "tx": 29.3, "tn": 12.5}, {"d": "1976-06-25", "dow": "Fri", "dm": "25 Jun", "tx": 32.1, "tn": 13.1}, {"d": "1976-06-26", "dow": "Sat", "dm": "26 Jun", "tx": 34.0, "tn": 16.0}, {"d": "1976-06-27", "dow": "Sun", "dm": "27 Jun", "tx": 33.8, "tn": 18.5}, {"d": "1976-06-28", "dow": "Mon", "dm": "28 Jun", "tx": 33.5, "tn": 17.4}, {"d": "1976-06-29", "dow": "Tue", "dm": "29 Jun", "tx": 30.3, "tn": 17.6}, {"d": "1976-06-30", "dow": "Wed", "dm": "30 Jun", "tx": 30.1, "tn": 14.6}, {"d": "1976-07-01", "dow": "Thu", "dm": "1 Jul", "tx": 30.6, "tn": 16.4}, {"d": "1976-07-02", "dow": "Fri", "dm": "2 Jul", "tx": 32.5, "tn": 14.8}, {"d": "1976-07-03", "dow": "Sat", "dm": "3 Jul", "tx": 33.5, "tn": 17.7}, {"d": "1976-07-04", "dow": "Sun", "dm": "4 Jul", "tx": 32.0, "tn": 19.0}, {"d": "1976-07-05", "dow": "Mon", "dm": "5 Jul", "tx": 32.0, "tn": 15.0}, {"d": "1976-07-06", "dow": "Tue", "dm": "6 Jul", "tx": 32.5, "tn": 16.5}, {"d": "1976-07-07", "dow": "Wed", "dm": "7 Jul", "tx": 31.0, "tn": 16.4}, {"d": "1976-07-08", "dow": "Thu", "dm": "8 Jul", "tx": 30.3, "tn": 13.1}, {"d": "1976-07-09", "dow": "Fri", "dm": "9 Jul", "tx": 25.4, "tn": 14.6}, {"d": "1976-07-10", "dow": "Sat", "dm": "10 Jul", "tx": 24.1, "tn": 10.4}], "stats": {"peakTx": 34.0, "peakTxDate": "26 Jun", "hottestNight": 19.0, "hottestNightDate": "4 Jul", "tropicalNights": 0, "warmNights": 2, "meanTn": 15.3, "meanTx": 30.7, "daysOver28": 16, "daysOver30": 14}}, {"id": "e1995", "year": 1995, "label": "August 1995", "tag": "The long warm", "blurb": "A drawn-out warm fortnight that produced one of the few 20th-century tropical nights, on 2 August.", "isReference": false, "days": [{"d": "1995-07-29", "dow": "Sat", "dm": "29 Jul", "tx": 29.2, "tn": 15.8}, {"d": "1995-07-30", "dow": "Sun", "dm": "30 Jul", "tx": 30.8, "tn": 11.4}, {"d": "1995-07-31", "dow": "Mon", "dm": "31 Jul", "tx": 31.9, "tn": 15.4}, {"d": "1995-08-01", "dow": "Tue", "dm": "1 Aug", "tx": 33.6, "tn": 15.5}, {"d": "1995-08-02", "dow": "Wed", "dm": "2 Aug", "tx": 32.7, "tn": 20.8}, {"d": "1995-08-03", "dow": "Thu", "dm": "3 Aug", "tx": 31.5, "tn": 18.6}, {"d": "1995-08-04", "dow": "Fri", "dm": "4 Aug", "tx": 26.7, "tn": 15.0}, {"d": "1995-08-05", "dow": "Sat", "dm": "5 Aug", "tx": 26.6, "tn": 12.3}, {"d": "1995-08-06", "dow": "Sun", "dm": "6 Aug", "tx": 25.8, "tn": 12.9}, {"d": "1995-08-07", "dow": "Mon", "dm": "7 Aug", "tx": 22.4, "tn": 14.6}, {"d": "1995-08-08", "dow": "Tue", "dm": "8 Aug", "tx": 21.5, "tn": 13.2}, {"d": "1995-08-09", "dow": "Wed", "dm": "9 Aug", "tx": 25.6, "tn": 8.2}, {"d": "1995-08-10", "dow": "Thu", "dm": "10 Aug", "tx": 28.7, "tn": 13.1}, {"d": "1995-08-11", "dow": "Fri", "dm": "11 Aug", "tx": 31.0, "tn": 14.0}, {"d": "1995-08-12", "dow": "Sat", "dm": "12 Aug", "tx": 29.5, "tn": 14.6}], "stats": {"peakTx": 33.6, "peakTxDate": "1 Aug", "hottestNight": 20.8, "hottestNightDate": "2 Aug", "tropicalNights": 1, "warmNights": 2, "meanTn": 14.4, "meanTx": 28.5, "daysOver28": 9, "daysOver30": 6}}, {"id": "e2003", "year": 2003, "label": "August 2003", "tag": "The European furnace", "blurb": "The continental heatwave of 2003. Ten days above 28 \u00b0C and a 36.4 \u00b0C peak \u2014 yet still no night held above 20 \u00b0C.", "isReference": false, "days": [{"d": "2003-08-03", "dow": "Sun", "dm": "3 Aug", "tx": 28.1, "tn": 10.4}, {"d": "2003-08-04", "dow": "Mon", "dm": "4 Aug", "tx": 31.2, "tn": 13.2}, {"d": "2003-08-05", "dow": "Tue", "dm": "5 Aug", "tx": 31.9, "tn": 18.4}, {"d": "2003-08-06", "dow": "Wed", "dm": "6 Aug", "tx": 32.9, "tn": 18.1}, {"d": "2003-08-07", "dow": "Thu", "dm": "7 Aug", "tx": 29.2, "tn": 16.5}, {"d": "2003-08-08", "dow": "Fri", "dm": "8 Aug", "tx": 29.8, "tn": 16.1}, {"d": "2003-08-09", "dow": "Sat", "dm": "9 Aug", "tx": 34.2, "tn": 16.4}, {"d": "2003-08-10", "dow": "Sun", "dm": "10 Aug", "tx": 36.4, "tn": 16.2}, {"d": "2003-08-11", "dow": "Mon", "dm": "11 Aug", "tx": 33.3, "tn": 19.9}, {"d": "2003-08-12", "dow": "Tue", "dm": "12 Aug", "tx": 28.7, "tn": 18.0}, {"d": "2003-08-13", "dow": "Wed", "dm": "13 Aug", "tx": 27.7, "tn": 15.6}], "stats": {"peakTx": 36.4, "peakTxDate": "10 Aug", "hottestNight": 19.9, "hottestNightDate": "11 Aug", "tropicalNights": 0, "warmNights": 4, "meanTn": 16.3, "meanTx": 31.2, "daysOver28": 10, "daysOver30": 6}}, {"id": "e2006", "year": 2006, "label": "July 2006", "tag": "High summer", "blurb": "A hot, settled week peaking at 35.3 \u00b0C, with warm but not tropical nights.", "isReference": false, "days": [{"d": "2006-07-16", "dow": "Sun", "dm": "16 Jul", "tx": 30.0, "tn": 13.5}, {"d": "2006-07-17", "dow": "Mon", "dm": "17 Jul", "tx": 31.6, "tn": 11.3}, {"d": "2006-07-18", "dow": "Tue", "dm": "18 Jul", "tx": 32.9, "tn": 13.3}, {"d": "2006-07-19", "dow": "Wed", "dm": "19 Jul", "tx": 35.3, "tn": 17.3}, {"d": "2006-07-20", "dow": "Thu", "dm": "20 Jul", "tx": 29.9, "tn": 18.6}, {"d": "2006-07-21", "dow": "Fri", "dm": "21 Jul", "tx": 30.2, "tn": 16.6}, {"d": "2006-07-22", "dow": "Sat", "dm": "22 Jul", "tx": 28.4, "tn": 18.7}, {"d": "2006-07-23", "dow": "Sun", "dm": "23 Jul", "tx": 25.5, "tn": 15.5}, {"d": "2006-07-24", "dow": "Mon", "dm": "24 Jul", "tx": 29.1, "tn": 13.1}, {"d": "2006-07-25", "dow": "Tue", "dm": "25 Jul", "tx": 32.1, "tn": 16.2}, {"d": "2006-07-26", "dow": "Wed", "dm": "26 Jul", "tx": 29.9, "tn": 18.5}], "stats": {"peakTx": 35.3, "peakTxDate": "19 Jul", "hottestNight": 18.7, "hottestNightDate": "22 Jul", "tropicalNights": 0, "warmNights": 3, "meanTn": 15.7, "meanTx": 30.4, "daysOver28": 10, "daysOver30": 6}}, {"id": "e2019", "year": 2019, "label": "July 2019", "tag": "The record day", "blurb": "A short, sharp surge to 36.0 \u00b0C on 25 July 2019 \u2014 intense by day, brief, and quick to cool.", "isReference": false, "days": [{"d": "2019-07-21", "dow": "Sun", "dm": "21 Jul", "tx": 22.1, "tn": 11.5}, {"d": "2019-07-22", "dow": "Mon", "dm": "22 Jul", "tx": 26.6, "tn": 15.6}, {"d": "2019-07-23", "dow": "Tue", "dm": "23 Jul", "tx": 32.1, "tn": 14.1}, {"d": "2019-07-24", "dow": "Wed", "dm": "24 Jul", "tx": 30.0, "tn": 18.6}, {"d": "2019-07-25", "dow": "Thu", "dm": "25 Jul", "tx": 36.0, "tn": 16.2}, {"d": "2019-07-26", "dow": "Fri", "dm": "26 Jul", "tx": 25.0, "tn": 17.8}, {"d": "2019-07-27", "dow": "Sat", "dm": "27 Jul", "tx": 19.3, "tn": 15.7}, {"d": "2019-07-28", "dow": "Sun", "dm": "28 Jul", "tx": 23.2, "tn": 14.7}], "stats": {"peakTx": 36.0, "peakTxDate": "25 Jul", "hottestNight": 18.6, "hottestNightDate": "24 Jul", "tropicalNights": 0, "warmNights": 1, "meanTn": 15.5, "meanTx": 26.8, "daysOver28": 3, "daysOver30": 3}}, {"id": "e2022", "year": 2022, "label": "July 2022", "tag": "The 40-degree spike", "blurb": "The day Britain first passed 40 \u00b0C. Reading reached 37.6 \u00b0C \u2014 the observatory's hottest day on record \u2014 then collapsed within 24 hours.", "isReference": false, "days": [{"d": "2022-07-15", "dow": "Fri", "dm": "15 Jul", "tx": 26.0, "tn": 9.0}, {"d": "2022-07-16", "dow": "Sat", "dm": "16 Jul", "tx": 28.4, "tn": 10.4}, {"d": "2022-07-17", "dow": "Sun", "dm": "17 Jul", "tx": 29.5, "tn": 12.0}, {"d": "2022-07-18", "dow": "Mon", "dm": "18 Jul", "tx": 34.9, "tn": 13.0}, {"d": "2022-07-19", "dow": "Tue", "dm": "19 Jul", "tx": 37.6, "tn": 20.1}, {"d": "2022-07-20", "dow": "Wed", "dm": "20 Jul", "tx": 24.6, "tn": 17.9}, {"d": "2022-07-21", "dow": "Thu", "dm": "21 Jul", "tx": 23.4, "tn": 13.8}, {"d": "2022-07-22", "dow": "Fri", "dm": "22 Jul", "tx": 21.7, "tn": 16.7}, {"d": "2022-07-23", "dow": "Sat", "dm": "23 Jul", "tx": 25.2, "tn": 13.5}, {"d": "2022-07-24", "dow": "Sun", "dm": "24 Jul", "tx": 26.2, "tn": 17.4}, {"d": "2022-07-25", "dow": "Mon", "dm": "25 Jul", "tx": 22.7, "tn": 15.7}], "stats": {"peakTx": 37.6, "peakTxDate": "19 Jul", "hottestNight": 20.1, "hottestNightDate": "19 Jul", "tropicalNights": 1, "warmNights": 1, "meanTn": 14.5, "meanTx": 27.3, "daysOver28": 4, "daysOver30": 2}}], "context": {"hottestDayEver": {"v": 37.6, "date": "19 Jul 2022"}, "recordStart": 1908, "recordEnd": "26 Jun 2026", "tropicalByDecade": {"1900s": 0, "1910s": 0, "1920s": 0, "1930s": 0, "1940s": 1, "1950s": 0, "1960s": 0, "1970s": 0, "1980s": 0, "1990s": 1, "2000s": 0, "2010s": 0, "2020s": 6}, "hottestNightsEver": [{"v": 21.3, "date": "26 Jun 2026"}, {"v": 20.9, "date": "25 Jun 2026"}, {"v": 20.8, "date": "2 Aug 1995"}, {"v": 20.3, "date": "5 Sep 1949"}, {"v": 20.1, "date": "19 Jul 2022"}]}};
+const HOURS = {"perYear": [{"year": 2015, "hours": 17.3, "start": "1 Jul", "startFull": "1 Jul, 05:30", "endFull": "1 Jul, 22:50", "nights": 0, "ongoing": false}, {"year": 2016, "hours": 20.8, "start": "19 Jul", "startFull": "19 Jul, 06:55", "endFull": "20 Jul, 03:45", "nights": 1, "ongoing": false}, {"year": 2017, "hours": 16.8, "start": "19 Jun", "startFull": "19 Jun, 06:05", "endFull": "19 Jun, 22:55", "nights": 0, "ongoing": false}, {"year": 2018, "hours": 18.5, "start": "3 Aug", "startFull": "3 Aug, 06:50", "endFull": "4 Aug, 01:20", "nights": 0, "ongoing": false}, {"year": 2019, "hours": 20.3, "start": "25 Jul", "startFull": "25 Jul, 05:50", "endFull": "26 Jul, 02:10", "nights": 0, "ongoing": false}, {"year": 2020, "hours": 50.0, "start": "11 Aug", "startFull": "11 Aug, 06:05", "endFull": "13 Aug, 08:05", "nights": 2, "ongoing": false}, {"year": 2021, "hours": 18.0, "start": "19 Jul", "startFull": "19 Jul, 06:40", "endFull": "20 Jul, 00:40", "nights": 0, "ongoing": false}, {"year": 2022, "hours": 22.6, "start": "12 Jul", "startFull": "12 Jul, 07:00", "endFull": "13 Jul, 05:35", "nights": 1, "ongoing": false}, {"year": 2023, "hours": 15.1, "start": "9 Sep", "startFull": "9 Sep, 07:45", "endFull": "9 Sep, 22:50", "nights": 0, "ongoing": false}, {"year": 2024, "hours": 16.2, "start": "30 Jul", "startFull": "30 Jul, 07:40", "endFull": "30 Jul, 23:55", "nights": 0, "ongoing": false}, {"year": 2025, "hours": 22.2, "start": "30 Jun", "startFull": "30 Jun, 06:30", "endFull": "1 Jul, 04:40", "nights": 1, "ongoing": false}, {"year": 2026, "hours": 58.3, "start": "24 Jun", "startFull": "24 Jun, 04:40", "endFull": "26 Jun, 15:00", "nights": 2, "ongoing": true}], "spell2026": {"thr": 20, "startMins": 480, "leadStartISO": "2026-06-23T20:40", "spellHours": 58.3, "spellStart": "24 Jun 04:40", "spellEnd": "26 Jun 15:00", "lead": "2026-06-23 20:40", "trace": [[0, 26.5], [10, 27.1], [20, 26.6], [30, 25.9], [40, 25.4], [50, 25.1], [60, 24.7], [70, 24.3], [80, 24.2], [90, 24.0], [100, 23.8], [110, 23.4], [120, 23.1], [130, 22.9], [140, 22.9], [150, 22.7], [160, 22.5], [170, 22.4], [180, 22.6], [190, 22.2], [210, 21.9], [220, 21.7], [230, 21.5], [240, 21.3], [250, 21.2], [260, 21.2], [270, 21.1], [280, 21.0], [290, 20.9], [300, 20.8], [310, 20.5], [320, 20.6], [330, 20.4], [340, 20.4], [350, 20.3], [360, 20.1], [370, 20.0], [380, 20.0], [390, 19.8], [400, 19.7], [410, 19.7], [420, 19.6], [430, 19.6], [440, 19.2], [450, 19.2], [460, 19.4], [470, 19.9], [480, 20.1], [490, 20.7], [500, 21.6], [510, 22.0], [520, 22.4], [530, 22.7], [540, 23.0], [550, 23.3], [560, 23.7], [570, 24.0], [580, 24.6], [590, 24.8], [600, 25.0], [610, 25.4], [620, 25.6], [630, 25.8], [640, 26.0], [650, 26.4], [660, 26.6], [670, 26.9], [680, 27.1], [690, 27.0], [700, 27.3], [710, 27.6], [720, 27.6], [730, 28.0], [740, 27.9], [750, 28.8], [760, 28.8], [770, 28.8], [780, 29.4], [790, 29.6], [800, 29.5], [810, 30.1], [820, 30.5], [830, 30.5], [840, 30.4], [850, 30.9], [860, 30.7], [870, 31.7], [880, 31.1], [890, 31.6], [900, 31.3], [910, 31.8], [920, 31.9], [930, 32.4], [940, 32.0], [950, 32.6], [960, 32.2], [970, 32.5], [980, 32.8], [990, 32.8], [1000, 33.1], [1010, 33.2], [1020, 33.3], [1030, 33.4], [1040, 33.7], [1050, 33.4], [1060, 33.4], [1070, 33.3], [1080, 34.3], [1090, 34.2], [1100, 33.6], [1110, 34.4], [1120, 33.9], [1130, 34.0], [1140, 34.0], [1150, 34.2], [1160, 33.9], [1170, 33.8], [1180, 34.0], [1190, 33.9], [1200, 33.7], [1210, 34.0], [1220, 34.1], [1230, 33.6], [1240, 33.6], [1250, 33.5], [1260, 33.6], [1270, 33.2], [1280, 33.0], [1290, 33.1], [1300, 33.0], [1310, 32.7], [1320, 32.5], [1330, 32.2], [1340, 31.9], [1350, 31.6], [1360, 31.2], [1370, 30.9], [1380, 30.4], [1390, 30.1], [1400, 29.8], [1410, 29.4], [1420, 29.1], [1430, 28.8], [1440, 28.5], [1450, 28.3], [1460, 28.0], [1470, 27.7], [1480, 27.5], [1490, 27.3], [1500, 27.1], [1510, 26.9], [1520, 26.7], [1530, 26.4], [1540, 26.2], [1550, 26.0], [1560, 25.8], [1570, 25.5], [1580, 25.2], [1590, 25.1], [1600, 24.9], [1610, 24.8], [1620, 24.5], [1630, 24.4], [1650, 24.1], [1660, 23.9], [1670, 23.7], [1680, 23.6], [1690, 23.5], [1700, 23.4], [1710, 23.2], [1720, 23.1], [1730, 22.9], [1740, 22.7], [1750, 22.6], [1760, 22.5], [1770, 22.4], [1780, 22.2], [1790, 22.1], [1800, 22.0], [1810, 22.0], [1820, 21.9], [1830, 21.7], [1840, 21.6], [1850, 21.4], [1860, 21.2], [1870, 21.1], [1880, 21.1], [1890, 21.0], [1900, 21.0], [1910, 20.9], [1920, 20.9], [1930, 20.9], [1940, 20.9], [1950, 21.0], [1960, 21.1], [1970, 21.3], [1980, 21.5], [1990, 21.9], [2000, 22.1], [2010, 22.4], [2020, 22.4], [2030, 22.9], [2040, 23.1], [2050, 23.6], [2060, 23.9], [2070, 24.1], [2080, 24.5], [2090, 24.7], [2100, 25.1], [2110, 25.5], [2120, 26.0], [2130, 26.6], [2140, 26.8], [2150, 27.1], [2160, 27.8], [2170, 27.7], [2180, 27.9], [2190, 28.4], [2200, 28.6], [2210, 29.0], [2220, 29.6], [2230, 29.7], [2240, 30.0], [2250, 29.7], [2260, 30.3], [2270, 30.6], [2280, 30.4], [2290, 30.9], [2300, 31.4], [2310, 31.3], [2320, 31.6], [2330, 32.0], [2340, 32.0], [2350, 32.2], [2360, 32.6], [2370, 32.4], [2380, 32.4], [2390, 32.6], [2400, 32.9], [2410, 33.2], [2420, 32.8], [2430, 33.6], [2440, 33.7], [2450, 33.4], [2460, 33.4], [2470, 33.3], [2480, 33.6], [2490, 33.9], [2500, 33.8], [2510, 33.4], [2520, 33.7], [2530, 33.5], [2540, 33.4], [2550, 33.5], [2560, 33.6], [2570, 33.3], [2580, 33.5], [2590, 33.4], [2600, 33.5], [2610, 33.0], [2620, 33.2], [2630, 32.9], [2640, 32.9], [2650, 32.5], [2660, 32.2], [2670, 32.5], [2680, 32.0], [2690, 31.5], [2700, 31.2], [2710, 31.0], [2720, 30.5], [2730, 30.4], [2740, 30.1], [2750, 29.6], [2760, 29.3], [2770, 29.1], [2780, 28.8], [2790, 28.5], [2800, 28.3], [2810, 28.1], [2820, 27.7], [2830, 27.3], [2840, 27.1], [2850, 26.8], [2860, 26.5], [2870, 26.3], [2880, 26.1], [2890, 25.9], [2900, 25.7], [2910, 25.5], [2920, 25.3], [2930, 25.2], [2940, 25.0], [2950, 24.9], [2960, 24.9], [2970, 24.7], [2980, 24.6], [2990, 24.5], [3000, 24.4], [3010, 24.2], [3020, 24.2], [3030, 24.1], [3040, 24.0], [3050, 23.9], [3060, 23.7], [3070, 23.6], [3090, 23.6], [3100, 23.4], [3110, 23.4], [3120, 23.3], [3130, 23.2], [3140, 23.1], [3150, 23.0], [3160, 22.7], [3170, 22.7], [3180, 22.5], [3190, 22.5], [3200, 22.5], [3210, 22.5], [3220, 22.4], [3230, 22.4], [3240, 22.3], [3250, 22.3], [3260, 22.1], [3270, 22.0], [3280, 22.1], [3290, 22.0], [3300, 21.9], [3310, 21.9], [3320, 21.9], [3330, 21.8], [3340, 21.7], [3350, 21.8], [3360, 21.9], [3370, 21.7], [3380, 21.5], [3390, 21.5], [3400, 21.3], [3410, 21.8], [3420, 22.3], [3430, 22.9], [3440, 23.6], [3450, 24.9], [3460, 24.9], [3470, 26.2], [3480, 26.1], [3490, 26.1], [3500, 26.5], [3510, 27.1], [3520, 27.4], [3530, 27.8], [3540, 28.4], [3550, 28.3], [3560, 28.6], [3570, 29.4], [3580, 29.9], [3590, 29.7], [3600, 30.5], [3610, 30.7], [3620, 30.8], [3630, 31.1], [3640, 31.3], [3650, 31.1], [3660, 31.1], [3670, 31.3], [3680, 31.4], [3690, 31.6], [3700, 31.4], [3710, 30.7], [3720, 30.5], [3730, 30.9], [3740, 31.1], [3750, 31.5], [3760, 31.2], [3770, 32.6], [3780, 31.7], [3790, 32.2], [3800, 32.7], [3810, 32.7], [3820, 32.7], [3830, 33.0], [3840, 33.4], [3850, 33.1], [3860, 33.6], [3870, 33.3], [3880, 33.4], [3890, 33.6], [3900, 33.7], [3910, 33.6], [3920, 33.5], [3930, 34.0], [3940, 33.9], [3950, 33.7], [3960, 33.7], [3970, 33.5], [3980, 33.3]], "nightBands": [[0, 440], [1400, 1880], [2840, 3320]], "totalMins": 3980}};
+const REDUCE = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+const Y_MIN = 8, Y_MAX = 39;
+const ev = id => DATA.events.find(e => e.id === id);
+const REF = DATA.events.find(e => e.isReference);
+const NS='http://www.w3.org/2000/svg';
+const elN=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+
+function ribbon(host, event, dayW, H){
+  const padL=38, padR=16, padT=20, padB=28;
+  const days=event.days;
+  const W=padL + days.length*dayW + padR;
+  const plotH=H-padT-padB;
+  const y=t=>padT+(Y_MAX-t)/(Y_MAX-Y_MIN)*plotH;
+  const cx=i=>padL+i*dayW+dayW/2;
+  const uid=event.id;
+  const has=v=>v!==null&&v!==undefined;
+
+  const svg=elN('svg',{class:'ribbon', viewBox:`0 0 ${W} ${H}`, width:W, height:H,
+    preserveAspectRatio:'xMinYMid meet', role:'img',
+    'aria-label':`${event.label}: daily maximum and overnight minimum temperatures`});
+
+  const defs=elN('defs',{});
+  const g=elN('linearGradient',{id:'ng_'+uid, gradientUnits:'userSpaceOnUse', x1:0,y1:y(22),x2:0,y2:y(9)});
+  [['0','#d61f55'],['.30','#df6a1e'],['.58','#c98a14'],['1','#1f8fa6']]
+    .forEach(([o,c])=>g.appendChild(elN('stop',{offset:o,'stop-color':c})));
+  defs.appendChild(g); svg.appendChild(defs);
+
+  [10,15,20,25,30,35].forEach(t=>{
+    svg.appendChild(elN('line',{x1:padL,y1:y(t),x2:W-padR,y2:y(t),stroke:'rgba(33,28,42,.07)','stroke-width':1}));
+    const tx=elN('text',{x:padL-7,y:y(t)+3.5,'text-anchor':'end','font-family':'Space Mono, monospace','font-size':9,fill:'#938b9f'});
+    tx.textContent=t; svg.appendChild(tx);
+  });
+
+  // threshold lines (labels are drawn last so they sit above the traces)
+  svg.appendChild(elN('line',{x1:padL,y1:y(28),x2:W-padR,y2:y(28),stroke:'var(--ember)','stroke-width':1.2,'stroke-dasharray':'2 5',opacity:.85}));
+  svg.appendChild(elN('line',{x1:padL,y1:y(20),x2:W-padR,y2:y(20),stroke:'var(--hot)','stroke-width':1.4,'stroke-dasharray':'5 4'}));
+
+  // bands
+  const bandW=Math.min(dayW*0.5,14);
+  const bandG=elN('g',{});
+  days.forEach((d,i)=>{
+    if(!has(d.tx)||!has(d.tn))return;
+    const top=y(d.tx),bot=y(d.tn);
+    const r=elN('rect',{x:cx(i)-bandW/2,y:top,width:bandW,height:Math.max(bot-top,1),
+      rx:Math.min(bandW/2,4),fill:'var(--day-soft)',stroke:'rgba(207,109,18,.30)','stroke-width':.75});
+    if(!REDUCE){r.style.transformOrigin=`${cx(i)}px ${bot}px`;r.style.transform='scaleY(0)';
+      r.style.transition=`transform .5s cubic-bezier(.2,.8,.2,1) ${0.12+i*0.03}s`;}
+    bandG.appendChild(r);
+  });
+  svg.appendChild(bandG);
+
+  const pts=key=>days.map((d,i)=>has(d[key])?`${cx(i)},${y(d[key])}`:null).filter(Boolean).join(' ');
+  const dayLine=elN('polyline',{points:pts('tx'),fill:'none',stroke:'var(--day-line)','stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'});
+  svg.appendChild(dayLine);
+  const nightLine=elN('polyline',{points:pts('tn'),fill:'none',stroke:`url(#ng_${uid})`,'stroke-width':3.4,'stroke-linejoin':'round','stroke-linecap':'round'});
+  svg.appendChild(nightLine);
+
+  days.forEach((d,i)=>{
+    if(!has(d.tn))return;
+    const trop=d.tn>=20;
+    svg.appendChild(elN('circle',{cx:cx(i),cy:y(d.tn),r:trop?4:2.8,
+      fill:trop?'var(--hot)':'var(--surface)',stroke:trop?'#fff':'var(--cool)','stroke-width':trop?1.4:1.6}));
+  });
+
+  // annotate the peak day-max and the hottest night (replaces hover readout)
+  const lab=(i,val,col,above)=>{
+    let x=cx(i), anchor='middle';
+    if(i>=days.length-2){anchor='end'; x=cx(i)-4;}
+    else if(i<=1){anchor='start'; x=cx(i)+4;}
+    const t=elN('text',{x,y:above?y(val)-9:y(val)+15,'text-anchor':anchor,
+      'font-family':'Space Mono, monospace','font-weight':700,'font-size':11,fill:col,
+      style:'paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round'});
+    t.textContent=val.toFixed(1)+'°'; svg.appendChild(t);
+  };
+  let pi=0,pv=-99,ni=0,nv=-99;
+  days.forEach((d,i)=>{if(has(d.tx)&&d.tx>pv){pv=d.tx;pi=i;}if(has(d.tn)&&d.tn>nv){nv=d.tn;ni=i;}});
+  lab(pi,pv,'var(--day)',true);
+  lab(ni,nv, nv>=20?'var(--hot)':'var(--cool)', false);
+
+  // threshold labels — drawn last, with an opaque halo, so they stay legible over the traces
+  const thrLabel=(val,txt,col)=>{
+    const t=elN('text',{x:padL+3,y:y(val)-5,'text-anchor':'start',
+      'font-family':'Space Mono, monospace','font-size':9,'font-weight':700,fill:col,'letter-spacing':'.06em',
+      style:'paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round'});
+    t.textContent=txt; svg.appendChild(t);
+  };
+  thrLabel(28,'HEATWAVE 28°','var(--ember)');
+  thrLabel(20,'TROPICAL 20°','var(--hot)');
+
+  // date ticks
+  const step=days.length>12?2:(days.length>7?2:1);
+  days.forEach((d,i)=>{
+    if(i%step!==0 && i!==days.length-1)return;
+    const tx=elN('text',{x:cx(i),y:H-9,'text-anchor':'middle','font-family':'Space Mono, monospace','font-size':8.5,fill:'#938b9f'});
+    tx.textContent=d.dm.split(' ')[0]; svg.appendChild(tx);
+  });
+
+  if(!REDUCE){
+    requestAnimationFrame(()=>{
+      [nightLine,dayLine].forEach((ln,k)=>{
+        const len=ln.getTotalLength(); ln.style.strokeDasharray=len; ln.style.strokeDashoffset=len;
+        ln.getBoundingClientRect(); ln.style.transition=`stroke-dashoffset ${k?1.0:1.25}s ease ${k?.1:.2}s`;
+        ln.style.strokeDashoffset=0;
+      });
+      bandG.querySelectorAll('rect').forEach(r=>r.style.transform='scaleY(1)');
+    });
+  }
+  host.innerHTML=''; host.appendChild(svg);
+}
+
+/* picker */
+const comps=DATA.events.filter(e=>!e.isReference);
+const picker=document.getElementById('picker');
+let active='e1976';
+comps.forEach(e=>{
+  const b=document.createElement('button');
+  b.className='ev'; b.setAttribute('aria-pressed','false');
+  b.innerHTML=`<div class="ev-year">${e.year}</div><div class="ev-tag">${e.tag}</div>`+
+    `<div class="ev-mini">${e.stats.daysOver28} days &ge;28° &middot; hottest night <b>${e.stats.hottestNight.toFixed(1)}°</b></div>`;
+  b.addEventListener('click',()=>{active=e.id; render();});
+  picker.appendChild(b);
+});
+
+function render(){
+  const e=ev(active);
+  [...picker.children].forEach((c,i)=>c.setAttribute('aria-pressed', comps[i].id===active?'true':'false'));
+  document.getElementById('refBlurb').textContent=REF.blurb;
+  document.getElementById('cmpName').textContent=e.tag;
+  document.getElementById('cmpWhen').textContent=e.label;
+  document.getElementById('cmpBlurb').textContent=e.blurb;
+
+  // shared scale: same height, same px-per-day across BOTH panels
+  const host=document.getElementById('refChart');
+  const w=Math.max(host.clientWidth||320, 240);
+  const padL=38,padR=16;
+  const maxDays=Math.max(REF.days.length, e.days.length);
+  let dayW=(w-padL-padR)/maxDays;
+  dayW=Math.max(12, Math.min(dayW, 44));
+  const H=300;
+  ribbon(document.getElementById('refChart'), REF, dayW, H);
+  ribbon(document.getElementById('cmpChart'), e, dayW, H);
+  buildH2H(REF,e);
+}
+
+function buildH2H(a,b){
+  const rows=[['Hottest day','peakTx','°C'],['Warmest night','hottestNight','°C'],
+    ['Tropical nights','tropicalNights',''],['Days ≥ 28 °C','daysOver28',''],['Mean overnight min','meanTn','°C']];
+  let html=`<div class="h2h-name"><span class="nm">June 2026</span><span class="vs">vs</span><span class="nm r">${b.tag}</span></div>`;
+  const fmt=v=>Number.isInteger(v)?v:v.toFixed(1);
+  rows.forEach(([lab,key,unit])=>{
+    const av=a.stats[key],bv=b.stats[key];
+    const aCls=av>bv?'win':'', bCls=bv>av?'win':'';
+    html+=`<div class="h2h-row"><div class="h2h-val l ${aCls}">${fmt(av)}${unit?`<span class="u">${unit}</span>`:''}</div>`+
+      `<div class="h2h-lab">${lab}</div><div class="h2h-val r ${bCls}">${fmt(bv)}${unit?`<span class="u">${unit}</span>`:''}</div></div>`;
+  });
+  document.getElementById('h2h').innerHTML=html;
+}
+
+/* decade strip */
+const dec=document.getElementById('dec');
+const decs=DATA.context.tropicalByDecade;
+const maxDec=Math.max(...Object.values(decs));
+Object.entries(decs).forEach(([k,v])=>{
+  const col=document.createElement('div'); col.className='dec-col';
+  const n=document.createElement('div'); n.className='dec-n'+(v?'':' zero'); n.textContent=v;
+  const bar=document.createElement('div'); bar.className='dec-bar'+(v?'':' zero');
+  bar.style.height='0px'; bar.dataset.h=(v/maxDec*135)+8;
+  const lab=document.createElement('div'); lab.className='dec-lab'; lab.textContent=k;
+  col.append(n,bar,lab); dec.appendChild(col);
+});
+function growDec(){dec.querySelectorAll('.dec-bar').forEach(b=>b.style.height=b.dataset.h+'px');}
+if(REDUCE) growDec();
+else new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){growDec();o.disconnect();}});},{threshold:.3}).observe(dec);
+
+/* continuous-hours: fill-between of the 2026 spell */
+function renderSpell(){
+  const host=document.getElementById('spellChart'); if(!host) return;
+  const sp=HOURS.spell2026;
+  const W=880,H=330,padL=38,padR=22,padT=22,padB=34;
+  const TMIN=16,TMAX=36,total=sp.totalMins;
+  const x=m=>padL+m/total*(W-padL-padR);
+  const y=t=>padT+(TMAX-t)/(TMAX-TMIN)*(H-padT-padB);
+  const halo='paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round';
+  const svg=elN('svg',{class:'spell',viewBox:`0 0 ${W} ${H}`,preserveAspectRatio:'xMidYMid meet',
+    role:'img','aria-label':'June 2026 five-minute temperature, held continuously above 20 °C for 58 hours'});
+
+  const defs=elN('defs',{});
+  const ag=elN('linearGradient',{id:'spellFill',gradientUnits:'userSpaceOnUse',x1:0,y1:y(35),x2:0,y2:y(20)});
+  [['0','rgba(223,74,30,.34)'],['.55','rgba(214,31,85,.24)'],['1','rgba(214,31,85,.08)']]
+    .forEach(([o,c])=>ag.appendChild(elN('stop',{offset:o,'stop-color':c})));
+  defs.appendChild(ag); svg.appendChild(defs);
+
+  // night bands
+  sp.nightBands.forEach(b=>{
+    svg.appendChild(elN('rect',{x:x(b[0]),y:padT,width:x(b[1])-x(b[0]),height:H-padT-padB,fill:'rgba(44,50,86,.06)'}));
+    const t=elN('text',{x:(x(b[0])+x(b[1]))/2,y:padT+11,'text-anchor':'middle','font-family':'Space Mono, monospace','font-size':9,fill:'#8a83a6','letter-spacing':'.14em'});
+    t.textContent='NIGHT'; svg.appendChild(t);
+  });
+  // gridlines
+  [20,24,28,32,36].forEach(tt=>{
+    svg.appendChild(elN('line',{x1:padL,y1:y(tt),x2:W-padR,y2:y(tt),stroke:'rgba(33,28,42,.06)','stroke-width':1}));
+    const tx=elN('text',{x:padL-7,y:y(tt)+3.5,'text-anchor':'end','font-family':'Space Mono, monospace','font-size':9,fill:'#938b9f'});
+    tx.textContent=tt; svg.appendChild(tx);
+  });
+  // area fill (spell portion only: m >= startMins)
+  const sm=sp.startMins;
+  const inSp=sp.trace.filter(p=>p[0]>=sm);
+  let d='M '+x(inSp[0][0])+' '+y(20);
+  inSp.forEach(p=>{d+=' L '+x(p[0])+' '+y(p[1]);});
+  d+=' L '+x(inSp[inSp.length-1][0])+' '+y(20)+' Z';
+  svg.appendChild(elN('path',{d,fill:'url(#spellFill)'}));
+  // 20°C baseline
+  svg.appendChild(elN('line',{x1:padL,y1:y(20),x2:W-padR,y2:y(20),stroke:'var(--hot)','stroke-width':1.6,'stroke-dasharray':'5 4'}));
+  const bl=elN('text',{x:padL+3,y:y(20)+15,'text-anchor':'start','font-family':'Space Mono, monospace','font-size':9.5,'font-weight':700,fill:'var(--hot)',style:halo});
+  bl.textContent='20°C'; svg.appendChild(bl);
+  // temperature trace
+  const line=elN('polyline',{points:sp.trace.map(p=>x(p[0])+','+y(p[1])).join(' '),fill:'none',
+    stroke:'var(--ink)','stroke-width':1.8,'stroke-linejoin':'round','stroke-linecap':'round',opacity:.88});
+  svg.appendChild(line);
+  // spell-start marker (last crossing of 20°C)
+  svg.appendChild(elN('circle',{cx:x(sm),cy:y(20),r:4,fill:'#fff',stroke:'var(--hot)','stroke-width':2}));
+  const s1=elN('text',{x:x(sm)+7,y:y(20)-7,'text-anchor':'start','font-family':'Space Mono, monospace','font-size':9.5,'font-weight':700,fill:'var(--ink)',style:halo});
+  s1.textContent='last below 20° · '+sp.spellStart; svg.appendChild(s1);
+  // night troughs that stayed above 20 (the tropical-night minima)
+  [sp.nightBands[1],sp.nightBands[2]].forEach(b=>{
+    if(!b) return;
+    const win=sp.trace.filter(p=>p[0]>=b[0]&&p[0]<=b[1]+150);
+    if(!win.length) return;
+    let mn=win[0]; win.forEach(p=>{if(p[1]<mn[1])mn=p;});
+    svg.appendChild(elN('circle',{cx:x(mn[0]),cy:y(mn[1]),r:3.6,fill:'var(--hot)',stroke:'#fff','stroke-width':1.3}));
+    const t=elN('text',{x:x(mn[0]),y:y(mn[1])+16,'text-anchor':'middle','font-family':'Space Mono, monospace','font-weight':700,'font-size':10,fill:'var(--hot)',style:halo});
+    t.textContent=mn[1].toFixed(1)+'°'; svg.appendChild(t);
+  });
+  // ongoing end marker
+  const last=sp.trace[sp.trace.length-1];
+  svg.appendChild(elN('circle',{cx:x(last[0]),cy:y(last[1]),r:4,fill:'var(--ember)',stroke:'#fff','stroke-width':1.4}));
+  const e1=elN('text',{x:x(last[0])-2,y:y(last[1])-9,'text-anchor':'end','font-family':'Space Mono, monospace','font-size':9.5,'font-weight':700,fill:'var(--ember)',style:halo});
+  e1.textContent='still '+last[1].toFixed(0)+'° · '+sp.spellEnd+' →'; svg.appendChild(e1);
+
+  if(!REDUCE){
+    requestAnimationFrame(()=>{
+      const len=line.getTotalLength(); line.style.strokeDasharray=len; line.style.strokeDashoffset=len;
+      line.getBoundingClientRect(); line.style.transition='stroke-dashoffset 1.6s ease .2s'; line.style.strokeDashoffset=0;
+    });
+  }
+  host.innerHTML=''; host.appendChild(svg);
+}
+
+/* continuous-hours: per-year bars */
+function renderBars(){
+  const host=document.getElementById('hoursBars'); if(!host) return;
+  const AX=60; host.innerHTML='';
+  HOURS.perYear.forEach(d=>{
+    const cls=d.ongoing?'hot':(d.hours>=40?'mid':'muted');
+    const row=document.createElement('div');
+    row.className='bar-row'+((d.ongoing||d.hours>=40)?' hi':'');
+    let val=`<b>${d.hours.toFixed(1)}</b> h`;
+    if(d.nights>=1) val+=` <span class="nights">· ${d.nights} night${d.nights>1?'s':''}</span>`;
+    if(d.ongoing) val+=` <span class="live">· ongoing</span>`;
+    row.innerHTML=`<div class="bar-yr">${d.year}</div>`+
+      `<div class="bar-track"><div class="bar-fill ${cls}" data-w="${Math.min(d.hours/AX*100,100)}"></div></div>`+
+      `<div class="bar-val">${val}</div>`;
+    host.appendChild(row);
+  });
+  const grow=()=>host.querySelectorAll('.bar-fill').forEach(f=>f.style.width=f.dataset.w+'%');
+  if(REDUCE) grow();
+  else new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){grow();o.disconnect();}});},{threshold:.2}).observe(host);
+}
+
+/* init + responsive rescale */
+render(); renderSpell(); renderBars();
+let rt; window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(render,180);});
+</script>
+</body>
+</html>
