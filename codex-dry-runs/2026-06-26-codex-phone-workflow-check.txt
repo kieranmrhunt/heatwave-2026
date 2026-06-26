@@ -1,0 +1,6 @@
+Codex dry-run marker for the heatwave dashboard weekend workflow.
+
+Created on 2026-06-26 from the Codex desktop session.
+Purpose: verify that Codex can write to kieranmrhunt/heatwave-2026 through the signed-in browser.
+
+This file is safe to delete after the rehearsal.
