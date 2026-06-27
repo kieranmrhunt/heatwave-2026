@@ -331,39 +331,50 @@ const DATA = {"events":[{"id":"e2026","year":2026,"label":"June 2026","tag":"The
 DATA.events.find(e=>e.id==='e1976').label='June-July 1976';
 DATA.events.splice(1,0,{
   "id":"e1949","year":1949,"label":"Aug-Sep 1949","tag":"The first tropical night",
-  "blurb":"The record's first tropical night arrived late in summer: 5 September held at 20.3 \u00b0C, after a brief pulse that reached 30.0 \u00b0C the day before.",
+  "blurb":"The record's first tropical night arrived late in summer: the days warmed in pulses, then 5 September held at 20.3 \u00b0C after a 30.0 \u00b0C afternoon.",
   "isReference":false,
   "days":[
+    {"d":"1949-08-29","dow":"Mon","dm":"29 Aug","tx":25.1,"tn":12.8},
+    {"d":"1949-08-30","dow":"Tue","dm":"30 Aug","tx":24.9,"tn":14.7},
     {"d":"1949-08-31","dow":"Wed","dm":"31 Aug","tx":28.6,"tn":13.3},
     {"d":"1949-09-01","dow":"Thu","dm":"1 Sep","tx":23.6,"tn":13.6},
     {"d":"1949-09-02","dow":"Fri","dm":"2 Sep","tx":21.7,"tn":10.7},
     {"d":"1949-09-03","dow":"Sat","dm":"3 Sep","tx":24.5,"tn":13.9},
     {"d":"1949-09-04","dow":"Sun","dm":"4 Sep","tx":30.0,"tn":15.5},
     {"d":"1949-09-05","dow":"Mon","dm":"5 Sep","tx":28.1,"tn":20.3},
-    {"d":"1949-09-06","dow":"Tue","dm":"6 Sep","tx":24.4,"tn":13.2}
+    {"d":"1949-09-06","dow":"Tue","dm":"6 Sep","tx":24.4,"tn":13.2},
+    {"d":"1949-09-07","dow":"Wed","dm":"7 Sep","tx":23.7,"tn":13.3}
   ],
-  "stats":{"peakTx":30.0,"peakTxDate":"4 Sep","hottestNight":20.3,"hottestNightDate":"5 Sep","tropicalNights":1,"warmNights":1,"meanTn":14.4,"meanTx":25.8,"daysOver28":3,"daysOver30":1}
+  "stats":{"peakTx":30.0,"peakTxDate":"4 Sep","hottestNight":20.3,"hottestNightDate":"5 Sep","tropicalNights":1,"warmNights":1,"meanTn":14.1,"meanTx":25.5,"daysOver28":3,"daysOver30":1}
 });
 DATA.events.splice(1,0,{
   "id":"e1923","year":1923,"label":"July 1923","tag":"The old benchmark",
-  "blurb":"A sharp early-record burst: three days above 30 \u00b0C, peaking at 34.7 \u00b0C, with warm nights that still stopped short of tropical. When the August 1990 heatwave reached 35.5 \u00b0C at Reading, the previous local benchmark it displaced was 12 July 1923.",
+  "blurb":"Two hot pulses in an early-record spell: five days above 30 \u00b0C, peaking at 34.7 \u00b0C, while the nights stayed short of tropical. When the August 1990 heatwave reached 35.5 \u00b0C at Reading, the previous local benchmark it displaced was 12 July 1923.",
   "isReference":false,
   "days":[
+    {"d":"1923-07-05","dow":"Thu","dm":"5 Jul","tx":29.5,"tn":9.2},
+    {"d":"1923-07-06","dow":"Fri","dm":"6 Jul","tx":32.8,"tn":14.5},
+    {"d":"1923-07-07","dow":"Sat","dm":"7 Jul","tx":31.5,"tn":16.1},
+    {"d":"1923-07-08","dow":"Sun","dm":"8 Jul","tx":26.6,"tn":14.9},
     {"d":"1923-07-09","dow":"Mon","dm":"9 Jul","tx":28.9,"tn":10.8},
     {"d":"1923-07-10","dow":"Tue","dm":"10 Jul","tx":26.6,"tn":16.9},
     {"d":"1923-07-11","dow":"Wed","dm":"11 Jul","tx":32.6,"tn":16.7},
     {"d":"1923-07-12","dow":"Thu","dm":"12 Jul","tx":34.7,"tn":18.4},
     {"d":"1923-07-13","dow":"Fri","dm":"13 Jul","tx":34.3,"tn":18.9},
     {"d":"1923-07-14","dow":"Sat","dm":"14 Jul","tx":26.3,"tn":17.5},
-    {"d":"1923-07-15","dow":"Sun","dm":"15 Jul","tx":24.9,"tn":17.2}
+    {"d":"1923-07-15","dow":"Sun","dm":"15 Jul","tx":24.9,"tn":17.2},
+    {"d":"1923-07-16","dow":"Mon","dm":"16 Jul","tx":23.5,"tn":15.0}
   ],
-  "stats":{"peakTx":34.7,"peakTxDate":"12 Jul","hottestNight":18.9,"hottestNightDate":"13 Jul","tropicalNights":0,"warmNights":2,"meanTn":16.6,"meanTx":29.8,"daysOver28":4,"daysOver30":3}
+  "stats":{"peakTx":34.7,"peakTxDate":"12 Jul","hottestNight":18.9,"hottestNightDate":"13 Jul","tropicalNights":0,"warmNights":2,"meanTn":15.5,"meanTx":29.3,"daysOver28":7,"daysOver30":5}
 });
 DATA.events.splice(DATA.events.findIndex(e=>e.id==='e2022'),0,{
   "id":"e2020","year":2020,"label":"August 2020","tag":"The sticky nights",
-  "blurb":"A modern humid analogue: six heatwave days in a row, one tropical night, and the only pre-2026 50-hour spell above 20 \u00b0C in the five-minute record. Nationally, August 2020 brought five tropical nights and the UK reached at least 34 \u00b0C somewhere on six consecutive days.",
+  "blurb":"A modern humid analogue: after a cool start, six heatwave days arrived in a row, one night stayed tropical, and the five-minute record logged its only pre-2026 50-hour spell above 20 \u00b0C. Nationally, August 2020 brought five tropical nights and the UK reached at least 34 \u00b0C somewhere on six consecutive days.",
   "isReference":false,
   "days":[
+    {"d":"2020-08-04","dow":"Tue","dm":"4 Aug","tx":22.5,"tn":7.3},
+    {"d":"2020-08-05","dow":"Wed","dm":"5 Aug","tx":23.8,"tn":15.5},
+    {"d":"2020-08-06","dow":"Thu","dm":"6 Aug","tx":27.7,"tn":17.5},
     {"d":"2020-08-07","dow":"Fri","dm":"7 Aug","tx":35.0,"tn":12.9},
     {"d":"2020-08-08","dow":"Sat","dm":"8 Aug","tx":30.6,"tn":17.9},
     {"d":"2020-08-09","dow":"Sun","dm":"9 Aug","tx":32.4,"tn":16.7},
@@ -371,11 +382,12 @@ DATA.events.splice(DATA.events.findIndex(e=>e.id==='e2022'),0,{
     {"d":"2020-08-11","dow":"Tue","dm":"11 Aug","tx":34.9,"tn":17.3},
     {"d":"2020-08-12","dow":"Wed","dm":"12 Aug","tx":34.9,"tn":20.0},
     {"d":"2020-08-13","dow":"Thu","dm":"13 Aug","tx":26.6,"tn":19.8},
-    {"d":"2020-08-14","dow":"Fri","dm":"14 Aug","tx":19.3,"tn":16.6}
+    {"d":"2020-08-14","dow":"Fri","dm":"14 Aug","tx":19.3,"tn":16.6},
+    {"d":"2020-08-15","dow":"Sat","dm":"15 Aug","tx":21.2,"tn":15.9}
   ],
-  "stats":{"peakTx":35.0,"peakTxDate":"7 Aug","hottestNight":20.0,"hottestNightDate":"12 Aug","tropicalNights":1,"warmNights":2,"meanTn":17.4,"meanTx":30.9,"daysOver28":6,"daysOver30":6}
+  "stats":{"peakTx":35.0,"peakTxDate":"7 Aug","hottestNight":20.0,"hottestNightDate":"12 Aug","tropicalNights":1,"warmNights":2,"meanTn":16.3,"meanTx":28.6,"daysOver28":6,"daysOver30":6}
 });
-Object.assign(DATA.events.find(e=>e.id==='e1949'),{blurb:"The record's first tropical night arrived late in summer: 5 September held at 20.3 °C, after a brief pulse that reached 30.0 °C the day before. Across England, St James's Park still holds the September daily-minimum record for the same date: 21.7 °C."});
+Object.assign(DATA.events.find(e=>e.id==='e1949'),{blurb:"The record's first tropical night arrived late in summer: the days warmed in pulses, then 5 September held at 20.3 °C after a 30.0 °C afternoon. Across England, St James's Park still holds the September daily-minimum record for the same date: 21.7 °C."});
 Object.assign(DATA.events.find(e=>e.id==='e1976'),{blurb:"Sixteen unbroken days above 28 °C — the longest spell in the record. But the skies were clear and the nights fell away: not one tropical night. Nationally, the drought became severe enough for Parliament to pass the Drought Act and appoint Denis Howell as Minister for Drought."});
 Object.assign(DATA.events.find(e=>e.id==='e1995'),{blurb:"A drawn-out warm fortnight that produced one of the few 20th-century tropical nights, on 2 August. In the Central England Temperature series, August 1995 remains the warmest August on record."});
 Object.assign(DATA.events.find(e=>e.id==='e2003'),{blurb:"The continental heatwave of 2003. Ten days above 28 °C and a 36.4 °C peak — yet still no night held above 20 °C. Across Europe, the wider 2003 heatwave is estimated to have caused more than 70,000 excess deaths."});
