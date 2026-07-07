@@ -249,13 +249,13 @@
   <!-- ============ HERO COPY ============ -->
   <section class="hero">
     <h1 class="headline">Hottest by <span class="d">day</span>.<br>Hottest by <span class="n">night</span>.</h1>
-    <p class="standfirst">June 2026 has rewritten the observatory's record on both counts. The peak of <b>34.9&nbsp;°C</b> on the 24th is the hottest June day in 118 years &mdash; beating the old mark of 34.0&nbsp;°C set in <b>1976</b> &mdash; and the temperature passed 34&nbsp;°C on <b>four days running</b>, a streak never recorded here in any month. After dark it went further: the nights of the 25th and 26th, at 20.9&nbsp;°C and <b>21.3&nbsp;°C</b>, are the two warmest ever logged on this site.</p>
+    <p class="standfirst">June 2026 rewrote the observatory's record on both counts. The peak of <b>34.9&nbsp;°C</b> on the 24th is the hottest June day in 118 years &mdash; beating the old mark of 34.0&nbsp;°C set in <b>1976</b> &mdash; and the temperature passed 34&nbsp;°C on <b>four days running</b>, a streak never recorded here in any month. After dark it went further: the nights of the 25th and 26th, at 20.9&nbsp;°C and <b>21.3&nbsp;°C</b>, are the two warmest ever logged on this site.</p>
   </section>
 
   <!-- ============ FIGURE 1 — COMPARISON (the highlight) ============ -->
   <section class="band first">
     <h2 class="title">Three shapes of a heatwave</h2>
-    <p class="lede">Heat never arrives the same way twice. <b>1976</b> was a marathon of hot days under clear skies that fell cool each night; <b>2022</b> was a single violent spike that broke within a day; <b>2026</b> stacks hot days and hot nights back to back. Pick an event to set it beside this week.</p>
+    <p class="lede">Heat never arrives the same way twice. <b>1976</b> was a marathon of hot days under clear skies that fell cool each night; <b>2022</b> was a single violent spike that broke within a day; <b>2026</b> stacked hot days and hot nights back to back. Pick an event to set beside the June 2026 episode.</p>
 
     <div class="picker" id="picker"></div>
     <div class="mobile-h2h" id="mobileH2H"></div>
@@ -265,7 +265,7 @@
       <div class="panel ref">
         <div class="p-head">
           <span class="p-name">June 2026</span>
-          <span class="badge">This heatwave</span>
+          <span class="badge">June 2026</span>
         </div>
         <p class="today-note" id="todayNote"></p>
         <div class="chartHost" id="refChart"></div>
@@ -292,7 +292,7 @@
   <!-- ============ FIGURE 2 — CONTINUOUS HOURS ABOVE 20°C ============ -->
   <section class="band">
     <h2 class="title">More than sixty hours above twenty</h2>
-    <p class="lede">Five-minute readings let us ask a sharper question: how long did the air stay <b>continuously</b> above 20&nbsp;°C, never once dropping back? In a normal summer the answer is a single afternoon &mdash; the heat breaks every night. This June it held for more than two and a half days, riding straight through three nights, before finally dropping back below the line at 27 Jun 01:15. The following night then bottomed out at 18.1&nbsp;°C at 27 Jun 04:40.</p>
+    <p class="lede">Five-minute readings let us ask a sharper question: how long did the air stay <b>continuously</b> above 20&nbsp;°C, never once dropping back? In a normal summer the answer is a single afternoon &mdash; the heat breaks every night. During the June 2026 episode it held for more than two and a half days, riding straight through three nights, before finally dropping back below the line at 27 Jun 01:15. The following night then bottomed out at 18.1&nbsp;°C at 27 Jun 04:40.</p>
 
     <div class="spellCard">
       <div class="spell-stat">
@@ -309,8 +309,8 @@
 
   <!-- ============ FIGURE 3 — DECADE STRIP ============ -->
   <section class="band">
-    <h2 class="title">Tropical nights barely existed &mdash; until now</h2>
-    <p class="lede">A <b>tropical night</b> never drops below 20&nbsp;°C. In the whole twentieth century the observatory logged just two &mdash; one in 1949, one in 1995. The 2020s alone hold <b>six</b>, and the two warmest of all fall in this single week.</p>
+    <h2 class="title">Tropical nights are becoming less rare</h2>
+    <p class="lede">A <b>tropical night</b> never drops below 20&nbsp;°C. In the whole twentieth century the observatory logged just two &mdash; one in 1949, one in 1995. The 2020s alone hold <b>six</b>, and the two warmest of all occurred during the June 2026 event.</p>
     <div class="dec" id="dec"></div>
     <p class="cap">Nights at or above 20&nbsp;°C per decade, any month &middot; Reading University Atmospheric Observatory.</p>
   </section>
@@ -641,7 +641,7 @@ function renderSpell(){
   const s1=elN('text',{x:x(sm)+7,y:y(20)-7,'text-anchor':'start','font-family':'Space Mono, monospace','font-size':11,'font-weight':700,fill:'var(--ink)',style:halo});
   s1.textContent='last below 20° · '+sp.spellStart; svg.appendChild(s1);
   const last=sp.trace[sp.trace.length-1];
-  // Label every above-20 night in the continuous spell; the live endpoint label handles an in-progress final night.
+  // Label every above-20 night in the continuous spell; the endpoint label handles a final partial night.
   sp.nightBands.slice(1).forEach((b,idx,arr)=>{
     if(!b) return;
     const win=sp.trace.filter(p=>p[0]>=b[0]&&p[0]<=b[1]+150);
@@ -657,7 +657,7 @@ function renderSpell(){
   // spell end marker
   svg.appendChild(elN('circle',{cx:x(last[0]),cy:y(last[1]),r:4,fill:'var(--ember)',stroke:'#fff','stroke-width':1.4}));
   const e1=elN('text',{x:x(last[0])-2,y:y(last[1])-9,'text-anchor':'end','font-family':'Space Mono, monospace','font-size':11,'font-weight':700,fill:'var(--ember)',style:halo});
-  e1.textContent=(year2026.ongoing?'still ':'ended ')+last[1].toFixed(1)+'° · '+sp.spellEnd+(year2026.ongoing?' →':''); svg.appendChild(e1);
+  e1.textContent=(year2026.ongoing?'continuing ':'ended at ')+last[1].toFixed(1)+'° · '+sp.spellEnd+(year2026.ongoing?' →':''); svg.appendChild(e1);
 
   if(!REDUCE){
     requestAnimationFrame(()=>{
